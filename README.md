@@ -8,6 +8,6 @@ php artisan migrate
 
 #### Seed
 ```
-php artisan db:seed --class=Optimisthub\LCSC\Seeders\LCSCSeeder
+php artisan db:seed --class=Optimisthub\\LCSC\\Seeders\\LCSCSeeder
 
 ```
