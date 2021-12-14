@@ -29,7 +29,7 @@
     "extra": {
         "laravel": {
             "providers":[
-                "Optimisthub\\LCSC\\Providers"
+                "Optimisthub\\LCSC\\Providers\\LCSCServiceProvider"
             ]
         }
     }
