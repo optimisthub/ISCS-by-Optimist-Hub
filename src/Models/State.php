@@ -16,12 +16,12 @@ class State extends Model
         return $this->belongsTo(State::class)->orderBy("name");
     }
 
-    public function getByCountryId(int $id)
+    public static function getByCountryId(int $id)
     {
         return self::query()->where("country_id", $id)->get();
     }
 
-    public function getByCountryCode(string $code)
+    public static function getByCountryCode(string $code)
     {
         return self::query()->whereHas("country", function ($query) use ($code) {
             return $query->where("iso3", $code)->orWhere("iso2", $code);

@@ -11,7 +11,7 @@ class City extends Model
         return $this->belongsTo(State::class);
     }
 
-    public function getByStateId(int $id)
+    public static function getByStateId(int $id)
     {
         return self::query()->where("state_id", $id)->get();
     }
