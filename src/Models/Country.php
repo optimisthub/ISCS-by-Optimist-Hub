@@ -6,9 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model
 {
-    public static function list()
+    public static function list( array $select = [])
     {
-        return self::query()->orderBy("name")->get();
+        $query = self::query()->orderBy("name");
+        if($select){
+            $query->select($select);
+        }
+
+        return $query->get();
     }
 
     public function states()
