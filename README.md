@@ -3,6 +3,7 @@
 #### Installation
 ```
 composer require optimisthub/lcsc
+php artisan migrate
 ```
 
 #### Seed
