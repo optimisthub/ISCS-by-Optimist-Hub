@@ -1,4 +1,4 @@
-### Counties, States, Cities list by OptimistHub
+### Counties, States, Cities list by OptimistHub for Laravel Projects or Any Agnostic PHP Projects 
 
 #### Installation
 ```

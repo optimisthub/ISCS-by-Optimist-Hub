@@ -11,6 +11,7 @@ class LCSCSeeder extends Seeder
 {
     public function run()
     {
+        ini_set('memory_limit', '-1');
         $countries = json_decode(file_get_contents(__DIR__ . "/../countries+states+cities.json"));
         foreach ($countries as $countryData) {
             $country = Country::query()->updateOrCreate(

@@ -13,7 +13,12 @@
     "authors": [
         {
             "name": "Hemn MovafeghiNalous",
-            "email": "hemn791@gmail.com",
+            "email": "hemn@optimisthub.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Fatih Toprak",
+            "email": "fatih@optimisthub.com",
             "role": "Developer"
         }
     ],
