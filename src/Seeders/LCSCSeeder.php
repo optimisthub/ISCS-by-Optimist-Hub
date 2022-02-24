@@ -13,13 +13,11 @@ class LCSCSeeder extends Seeder
     {
         ini_set('memory_limit', '-1');
 
-
         $remoteJson = 'https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/countries+states+cities.json';
 
         $fileSize = $this->remoteFileSize($remoteJson);
 
         $this->info('Fetching countries from remote source...['.$fileSize.']');
-
 
         $countries = $this->remoteGet($remoteJson);
         //$countries = json_decode(file_get_contents(__DIR__ . "/../countries+states+cities.json"));
@@ -70,7 +68,6 @@ class LCSCSeeder extends Seeder
             }
             $this->info("done." . PHP_EOL);
         }
-
     }
 
     /**
@@ -79,7 +76,7 @@ class LCSCSeeder extends Seeder
      * @param [string] $url
      * @return void
      */
-    private function remoteGet( $url ) : string
+    private function remoteGet( $url )
     {
         $ch = curl_init();
 
@@ -104,32 +101,23 @@ class LCSCSeeder extends Seeder
     private function remoteFileSize( $url )
     {
         $ch = curl_init($url);
-
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, TRUE);
         curl_setopt($ch, CURLOPT_NOBODY, TRUE);
-
         $data = curl_exec($ch);
         $size = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
-
         curl_close($ch);
-
-
         $bytes = $size;
-
         if ($bytes > 0)
         {
             $unit = intval(log($bytes, 1024));
             $units = array('B', 'KB', 'MB', 'GB');
-
             if (array_key_exists($unit, $units) === true)
             {
                 return sprintf('%d %s', $bytes / pow(1024, $unit), $units[$unit]);
             }
         }
-
         return $bytes;
-
     }
 
     /**
