@@ -19,7 +19,7 @@ class LCSCSeeder extends Seeder
 
         $this->info('Fetching countries from remote source...['.$fileSize.']');
 
-        $countries = $this->remoteGet($remoteJson);
+        $countries = json_decode($this->remoteGet($remoteJson));
         //$countries = json_decode(file_get_contents(__DIR__ . "/../countries+states+cities.json"));
         foreach ($countries as $countryData) {
             $country = Country::query()->updateOrCreate(
