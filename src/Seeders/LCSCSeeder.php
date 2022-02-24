@@ -66,7 +66,7 @@ class LCSCSeeder extends Seeder
                     ]);
                 }
             }
-            $this->info("done." . PHP_EOL);
+            $this->info("#### Done. ####");
         }
     }
 
