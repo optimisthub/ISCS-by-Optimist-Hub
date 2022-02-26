@@ -7,20 +7,32 @@ use Optimisthub\LCSC\Models\City;
 use Optimisthub\LCSC\Models\Country;
 use Optimisthub\LCSC\Models\State;
 
+use Storage;
+use DB;
+use Illuminate\Database\Schema\Blueprint;
+
 class LCSCSeeder extends Seeder
 {
     public function run()
     {
         ini_set('memory_limit', '-1');
 
+        if(Storage::disk('local')->exists('public/lcsc/city-state-country.sql'))
+        {
+            DB::unprepared(Storage::get('public/lcsc/city-state-country.sql'));
+            $this->info("#### Old Sql Truncated and new Sql Imported Successfully.. ####");
+            return;
+        }
+
         $remoteJson = 'https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/countries+states+cities.json';
 
         $fileSize = $this->remoteFileSize($remoteJson);
 
         $this->info('Fetching countries from remote source...['.$fileSize.']');
+        Storage::put('public/lcsc/city-state-country.json', $this->remoteGet($remoteJson));
 
         $countries = json_decode($this->remoteGet($remoteJson));
-        //$countries = json_decode(file_get_contents(__DIR__ . "/../countries+states+cities.json"));
+
         foreach ($countries as $countryData) {
             $country = Country::query()->updateOrCreate(
                 [
@@ -67,6 +79,8 @@ class LCSCSeeder extends Seeder
                 }
             }
             $this->info("#### Done. ####");
+
+            Storage::put('public/lcsc/city-state-country.sql', file_get_contents(__DIR__ . "/../city-state-country.sql"));
         }
     }
 
@@ -130,4 +144,5 @@ class LCSCSeeder extends Seeder
     {
         echo $string . PHP_EOL;
     }
+
 }
